@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Accessibility</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+<section class="intro">
+  <h1 class="app_header">Accessible Websites Tool</h1>
+  <p class="app_desc">A selection of ways for website users to make content more accessible.</p>
+</section> 
+<noscript>
+  <h2 class="noscript">This website reqyires Javascript to work. Please enable Javascript in your browser.</h2>
+  <style>
+    section{
+      display: none;
+    }
+    section.intro{
+      display: block;
+    }
+    h2.noscript {
+      text-align: center;
+      color: black;
+      margin:0;
+      padding: 0 25px 50px 25px;
+    }
+  </style>
+</noscript>      
+<section class="container">
+    <input type="range" min="" max="50" value="" class="slider x" id="myRange" onfocus="focus()"><br><br>
+    <p class="a" id="textSize">Adjust text size</p>
+</section>      
+<section class="contrast-container" id="contrastContainer">
+    <label for="selectcolor" class="select_color_label" id="selectColor">Select a color</label>
+    <br>
+    <input type="color" id="selectcolor" name="select_color" value="#dce8ff" onchange="colorChange()">
+    <br><br>
+    <input type="range" min="0" max="100" value="" class="slider x" id="contrastRange">
+    <br><br>
+    <p class="a" id="contrastText">Adjust contrast</p>
+</section>    
+<section class="highlight-container" id="highlightContainer">
+    <h2 class="highlight-mobile">Text highlighter</h3>
+    <p class="highlight-mobile">This feature is only available on desktop</p>
+    <div class="highlight-desktop">
+      <div class="a">
+      <input class="highlighter" id="checkbox" type="checkbox" name="highlighter" id="checkboxLabel" value="highlighter">
+      <br><br>
+      <label class="label" for="highlighter">Highlight Text</label>
+      <br><br>
+      <form action="#" method="post" class="keyOrScroll" id="highlightMethod">
+        <input class="mouse radio" id="scroll" type="radio" name="highlightMethod" value=scroll>
+        <label class="mouse-label" for="scroll">By line (mouse or trackpad)</label>
+        <input class="page-down radio" id="pgDown" type="radio" name="highlightMethod" value=pgDown>
+        <label class="page-down-label" for="pgDown">By sentence (d/w keys)</label>
+      </form>
+      <form action="#" method="post" class="highlight-color" id="colors">
+        <input class="yellow radio" type="radio"  name="colourOption" id="yellowOption" value="yellow">
+        <label class="yellow-text" for="yellowOption">Yellow</label>
+        <input class="red radio" id="redOption" type="radio"  name="colourOption" value="red">
+        <label class="red-text" for="redOption">Red</label>
+        <input class="blue radio" id="blueOption" type="radio"  name="colourOption" value="blue">
+        <label class="blue-text" for="blueOption">Blue</label>
+        <input class="green radio" id="greenOption" type="radio"  name="colourOption" value="green">
+        <label class="green-text" for="greenOption">Green</label>
+      </form>
+      <input type="range" min="0" max="100" value="" class="slider" id="colourRange">
+      </div>
+      <p class="a lorem" id="highlightText">"This is a nonsense paragraph to demonstrate my sentence higlighter. Can it can detect sentences that end with a question mark? Yes, and the ones that end in an exclamation mark! It isn't confused by dates like 28.06.2020, or by titles like Dr. Jones. You can use it scroll line by line with your mouse/trackpad, or sentence by sentence using your keyboard."</p>
+      <br>
+  </div>
+</section>   
+<section class="dyselxia-friendly-container" id="dyselxiaFriendlyContainer">
+    <div class="a">
+    <input class="dyselxia-friendly" id="dyselxiaFriendly" type="checkbox" name="dyselxiaFriendly" value="highlighter">
+    <br><br>
+    <label class="label" for="dyselxiaFriendly">Dyselxia Friendly</label>
+    <br><br>
+    <h2>Elements to consider in Dyslexia friendly web styling</h2>
+    <h3>Readable fonts</h3>
+    <p class="a dyselxia-friendly-text">Use sans serif fonts, such as Arial and Comic Sans, as letters can appear less crowded.
+    Font size should be 12-14 point or equivalent (e.g. 1-1.2em / 16-19 px). 
+    Larger inter-letter / character spacing (sometimes called tracking) improves readability, ideally around 35% of the average letter width. If letter spacing is excessive it can reduce readability.
+    Inter-word spacing should be at least 3.5 times the inter-letter spacing.
+    Larger line spacing improves readability and should be proportional to inter-word spacing; 1.5/150% is preferable.
+      <span style='text-decoration: underline'>Avoid underlining</span> <i>and italics</i> <span style="font-style: oblique">as</span> <em>this can make the text appear to run together and cause crowding.</em><span style='text-decoration: underline'> Use bold for emphasis.</span><br>AVOID TEXT IN UPPERCASE/CAPITAL LETTERS AND SMALL CAPS, <span style="font-variant-caps: all-small-caps">which can be less familiar to the reader and harder to read.</span></p>
+    
+    <h3>Headings and structure</h3>
+    
+    <p class="a dyselxia-friendly-text">Use headings and styles to create consistent structure to help people navigate through your content.
+    For headings, use a font size that is at least 20% larger than the normal text. If further emphasis is required, then use bold.
+    Add extra space around headings and between paragraphs.
+    Ensure hyperlinks look different from headings and normal text.
+    Left align text, without justification.</p>
+    
+    <h3>Colour</h3>
+    
+    <p class="a dyselxia-friendly-text">Use single colour backgrounds. Avoid background patterns or pictures and distracting surrounds.
+    Use sufficient contrast levels between background and text.
+    Use dark coloured text on a light (not white) background. White can appear too dazzling. Use cream or a soft pastel colour.
+    Avoid green and red/pink, as these colours are difficult for those who have colour vision deficiencies (colour blindness).
+    <br>
+    <br>
+    Abridged from the "Dyslexia Friendly Style Guide" at <a href="https://www.bdadyslexia.org.uk/advice/employers/creating-a-dyslexia-friendly-workplace/dyslexia-friendly-style-guide">British Dyslexia Association</a>
+    </p>
+  </section>
+         
+        <script src="index.js" async defer></script>
+    </body>
+</html>

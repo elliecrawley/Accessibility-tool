@@ -1,0 +1,168 @@
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #fffafa;
+}
+
+section {
+  padding: 50px 25px;
+}
+
+section.intro, section.highlight-container {
+  text-align: center;
+}
+
+.app_header, .highlight-mobile{
+  color: #000;
+}
+
+.highlight-desktop{
+  display: none;
+}
+
+@media screen and (min-width: 1024px){
+  .highlight-mobile{
+    display: none;
+  }
+
+  .highlight-desktop{
+    display: block;
+  }
+}
+
+.container{
+    background-color: #EEEEEE;
+  }
+  
+  .highlight-container{
+    background-color: #dbfff6;
+  }
+  
+  .x {
+    display: inline-block;
+    display: block;
+    margin-left: auto;
+      margin-right: auto;
+  }
+  
+  .a{
+    text-align: center;
+    cursor: default;
+  }
+  
+  .lorem {
+    cursor: none;
+  }
+  
+  
+  /* The slider itself */
+  .slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 60vw;
+    height: 5px;
+    border-radius: 12px;
+    background: #6A6A6A;
+    outline: none;
+    margin-left: auto;
+    margin-right: auto
+  }
+
+  .slider:focus{
+    background-color: black;
+  }
+
+  /* The slider handle */
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none; 
+    width: 30px; 
+    height: 30px; 
+    border-radius: 25px;
+    background-color: #FFB24E;
+    cursor: pointer;
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(170,170,170,1), -2px -2px 2px 0px rgba(255,255,255,1);
+    box-shadow: 2px 2px 2px 0px rgba(170,170,170,1), -2px -2px 2px 0px rgba(255,255,255,1);
+    transition: transform 0.5s;
+  }
+
+  .slider::-webkit-slider-thumb:hover{
+    transform: scale(1.2);
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 30px; 
+    height: 30px; 
+    border-radius: 25px;
+    background-color: #FFB24E;
+    cursor: pointer;
+    -moz-box-shadow: 2px 2px 2px 0px rgba(170,170,170,1), -2px -2px 2px 0px rgba(255,255,255,1);
+  }
+
+ .slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+  }
+
+  #selectcolor{
+    margin: auto;
+    display: block;
+  }
+  
+  .select_color_label{
+    text-align: center;
+    display: block;
+  }
+
+  .highlighter, .dyselxia-friendly{
+    width: 30px;
+    height: 30px;
+  }
+  
+  .label{
+    font-size: 20px;
+  }
+  
+  .radio{
+    width: 20px;
+    height: 20px;
+  }
+  
+  .highlight-color{
+    display: none;
+    padding-bottom: 25px;
+  }
+  
+  .keyOrScroll {
+    display: none;
+    padding-bottom: 20px;
+  }
+  
+  #colourRange {
+    display: none;
+    margin-bottom: 30px;
+  }
+  
+  #spanHighlight{
+    background-color: hsl(60, 100%, 75%);
+  }
+  
+  .dyselxia-friendly-container{
+    background-color: #98FB98
+  }
+  
+  .dyselxia-friendly-text{
+    color: grey;
+    text-align: justify;
+  }
+  
+  a{
+    font-weight: normal !important;
+    text-decoration: none;
+    color: grey;
+    cursor: auto
+  }
+  
+  h1,h2,h3,h4,h5,h6{
+    color: red;
+  }
