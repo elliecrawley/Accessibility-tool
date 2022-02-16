@@ -43,21 +43,17 @@
     <p class="a" id="textSize">Adjust text size</p>
 </section>      
 <section class="contrast-container" id="contrastContainer">
-    <label for="selectcolor" class="select_color_label" id="selectColor">Select a color</label>
-    <br>
-    <input type="color" id="selectcolor" name="select_color" value="#dce8ff" onchange="colorChange()">
-    <br><br>
     <input type="range" min="0" max="100" value="" class="slider x" id="contrastRange">
     <br><br>
     <p class="a" id="contrastText">Adjust contrast</p>
 </section>    
 <section class="highlight-container" id="highlightContainer">
-    <h2 class="highlight-mobile">Text highlighter</h3>
-    <p class="highlight-mobile">This feature is only available on desktop</p>
+    <!-- <h2 class="highlight-mobile">Text highlighter</h3>
+    <p class="highlight-mobile">This feature is only available on desktop</p> -->
     <div class="highlight-desktop">
       <div class="a">
-      <input class="highlighter" id="checkbox" type="checkbox" name="highlighter" id="checkboxLabel" value="highlighter">
-      <br><br>
+      <!-- <input class="highlighter" id="checkbox" type="checkbox" name="highlighter" id="checkboxLabel" value="highlighter">
+      <br><br> -->
       <label class="label" for="highlighter">Highlight Text</label>
       <br><br>
       <form action="#" method="post" class="keyOrScroll" id="highlightMethod">
@@ -66,17 +62,6 @@
         <input class="page-down radio" id="pgDown" type="radio" name="highlightMethod" value=pgDown>
         <label class="page-down-label" for="pgDown">By sentence (d/w keys)</label>
       </form>
-      <form action="#" method="post" class="highlight-color" id="colors">
-        <input class="yellow radio" type="radio"  name="colourOption" id="yellowOption" value="yellow">
-        <label class="yellow-text" for="yellowOption">Yellow</label>
-        <input class="red radio" id="redOption" type="radio"  name="colourOption" value="red">
-        <label class="red-text" for="redOption">Red</label>
-        <input class="blue radio" id="blueOption" type="radio"  name="colourOption" value="blue">
-        <label class="blue-text" for="blueOption">Blue</label>
-        <input class="green radio" id="greenOption" type="radio"  name="colourOption" value="green">
-        <label class="green-text" for="greenOption">Green</label>
-      </form>
-      <input type="range" min="0" max="100" value="" class="slider" id="colourRange">
       </div>
       <p class="a lorem" id="highlightText">"This is a nonsense paragraph to demonstrate my sentence higlighter. Can it can detect sentences that end with a question mark? Yes, and the ones that end in an exclamation mark! It isn't confused by dates like 28.06.2020, or by titles like Dr. Jones. You can use it scroll line by line with your mouse/trackpad, or sentence by sentence using your keyboard."</p>
       <br>

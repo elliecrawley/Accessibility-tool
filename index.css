@@ -16,7 +16,7 @@ section.intro, section.highlight-container {
   color: #000;
 }
 
-.highlight-desktop{
+/* .highlight-desktop{
   display: none;
 }
 
@@ -28,10 +28,14 @@ section.intro, section.highlight-container {
   .highlight-desktop{
     display: block;
   }
-}
+} */
 
 .container{
     background-color: #EEEEEE;
+  }
+
+  .contrast-container{
+    background-color: #dce8ff;
   }
   
   .highlight-container{
@@ -129,17 +133,14 @@ section.intro, section.highlight-container {
   }
   
   .highlight-color{
-    display: none;
     padding-bottom: 25px;
   }
   
   .keyOrScroll {
-    display: none;
     padding-bottom: 20px;
   }
   
   #colourRange {
-    display: none;
     margin-bottom: 30px;
   }
   

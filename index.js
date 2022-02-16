@@ -1,8 +1,4 @@
-//***************************************************Change font size
-
-function focus(){
-  alert("focused")
-}
+//********************************************************Change font size
 
 //get the font size
 var el = document.getElementById("textSize");
@@ -19,512 +15,341 @@ slider.oninput = function() {
        var newFontSize = this.value
        el.style.fontSize = newFontSize + "px";
     }
-};
+}
 
-//*****************************************Adjust contrast
 
-function changeContrast(){
 
-  //change background
+//*******************************************************************Adjust contrast
 
-  //get the background-color
-  var setColor = document.getElementById("selectcolor"); 
-  var bgDiv = document.getElementById("contrastContainer");
-  //set the background color
-  bgDiv.style.backgroundColor = setColor.value;
-  contrastDiv = window.getComputedStyle(bgDiv).backgroundColor
+//change background
 
-  //extract the RBG values
-  var pos1 = contrastDiv.indexOf("(");
-  var pos2 = contrastDiv.indexOf(")");
-  var contrastDivRGB = contrastDiv.slice(pos1+1, pos2);
-  var arr = contrastDivRGB.split(",");
-  var contrastDivRedNum = parseFloat(arr[0]);
-  var contrastDivGreenNum = parseFloat(arr[1]);
-  var contrastDivBlueNum = parseFloat(arr[2]);
+//get the background-color
+var bgDiv = document.getElementById("contrastContainer");
+var contrastDiv = window.getComputedStyle(bgDiv).backgroundColor
+//console.log(contrastDiv)
+//extract the RBG values
+var pos1 = contrastDiv.indexOf("(");
+var pos2 = contrastDiv.indexOf(")");
+var contrastDivRGB = contrastDiv.slice(pos1+1, pos2);
+var arr = contrastDivRGB.split(",");
+var contrastDivRedNum = parseFloat(arr[0]);
+var contrastDivGreenNum = parseFloat(arr[1]);
+var contrastDivBlueNum = parseFloat(arr[2]);
 
-  //convert RGB to HSL
-    
-    //divide RGB by 255
-    br = contrastDivRedNum/255, bg = contrastDivGreenNum/255, bb = contrastDivBlueNum/255;
-
-    //determine which value is biggest and smallest
-    var Bmax = Math.max(br, bg, bb), Bmin = Math.min(br, bg, bb);
-    
-    // bh = body-hue, bs = body-saturation, bl = body-lightness
-    var bh, bs, bl;
-    var d = Bmax - Bmin;
-
-    //calculate lightness
-    bl = (Bmax + Bmin) / 2
-
-    //calculate saturation
-    bs = (Bmax == Bmin) ? 0 : d/ 1 - Math.abs(2*bl - 1);
-    bs = Math.round(bs)
-    bs = Math.abs(bs)
-
-    //calculate hue
-    if (Bmax == Bmin) {
-      bh = 0; // achromatic
-    } else {     
-      switch (Bmax) {
-        // if max = red
-        case br: bh = 60 * ((bg - bb) / d + (bg < bb ? 6 : 0)); break;
-        // if max = green
-        case bg: bh = 60 * ((bb - br) / d + 2); break;
-        // if max = blue
-        case bb: bh = 60 * ((br - bg) / d + 4); break;
-      }  
-    }
-    
-    // s & l * 100 to return as a %
-  bs *= 100;
-  bl *= 100;
-  bl = Math.round(bl);
-  bh = Math.round(bh);
-
-  originalBH = bh;
-  originalBS = bs;
-  originalBL = bl;
-  var originalContrastDivHSL = "hsl(" + originalBH + ", " + originalBS + "%, " + originalBL + "%)";
-
-  document.getElementById("contrastRange").value = originalBL;
-
-  var contrastSlider = document.getElementById("contrastRange");
+//convert RGB to HSL
   
-  //change text contrast
+  //divide RGB by 255
+  br = contrastDivRedNum/255, bg = contrastDivGreenNum/255, bb = contrastDivBlueNum/255;
 
-  //get the text-color
-  var textContrast = document.getElementById("contrastText");
-  var setContrastColor = document.getElementById("selectColor");
-  var contrastText = window.getComputedStyle(textContrast).color;
+  //determine which value is biggest and smallest
+  var Bmax = Math.max(br, bg, bb), Bmin = Math.min(br, bg, bb);
+  
+  // bh = body-hue, bs = body-saturation, bl = body-lightness
+  var bh, bs, bl;
+  var d = Bmax - Bmin;
 
-  //extract the RBG values
-  var pos1 = contrastText.indexOf("(");
-  var pos2 = contrastText.indexOf(")");
-  var contrastTextRGB = contrastText.slice(pos1+1, pos2);
-  var arr = contrastTextRGB.split(",");
-  var contrastTextRedNum = parseFloat(arr[0]);
-  var contrastTextGreenNum = parseFloat(arr[1]);
-  var contrastTextBlueNum = parseFloat(arr[2]);
+  //calculate lightness
+  bl = (Bmax + Bmin) / 2
 
-  //convert RGB to HSL
-    
-    //divide RGB by 255
-    tr = contrastTextRedNum/255, tg = contrastTextGreenNum/255, tb = contrastTextBlueNum/255;
+  //calculate saturation
+  bs = (Bmax == Bmin) ? 0 : d/ 1 - Math.abs(2*bl - 1);
+  bs = Math.round(bs)
+  bs = Math.abs(bs)
 
-    //determine which value is biggest and smallest
-    var Tmax = Math.max(tr, tg, tb), Tmin = Math.min(tr, tg, tb);
+  //calculate hue
+  if (Bmax == Bmin) {
+    bh = 0; // achromatic
+  } else {     
+    switch (Bmax) {
+      // if max = red
+      case br: bh = 60 * ((bg - bb) / d + (bg < bb ? 6 : 0)); break;
+      // if max = green
+      case bg: bh = 60 * ((bb - br) / d + 2); break;
+      // if max = blue
+      case bb: bh = 60 * ((br - bg) / d + 4); break;
+    }  
+  }
+  
+  // s & l * 100 to return as a %
+bs *= 100;
+bl *= 100;
+bl = Math.round(bl);
+bh = Math.round(bh);
 
-    var th, ts, tl;
-    var d = Tmax - Tmin;
+originalBH = bh;
+originalBS = bs;
+originalBL = bl;
+var originalContrastDivHSL = "hsl(" + originalBH + ", " + originalBS + "%, " + originalBL + "%)";
+//console.log(originalContrastDivHSL)
 
-    //calculate lightness
-    tl = (Tmax + Tmin) / 2
+document.getElementById("contrastRange").value = originalBL;
 
-    //calculate saturation
-    ts = (Tmax == Tmin) ? 0 : d/ 1 - Math.abs(2*tl - 1);
-    ts = Math.round(ts)
-    ts = Math.abs(ts)
+var contrastSlider = document.getElementById("contrastRange");
 
-    //calculate hue
-    if (Tmax == Tmin) {
-      th = 0; // achromatic
-    } else {     
-      switch (Tmax) {
-        // if max = red
-        case tr: th = 60 * ((tg - tb) / d + (tg < tb ? 6 : 0)); break;
-        // if max = green
-        case tg: th = 60 * ((tb - tr) / d + 2); break;
-        // if max = blue
-        case tb: th = 60 * ((tr - tg) / d + 4); break;
-      }  
-    }
-    
-    // s & l * 100 to return as a %
-  ts *= 100;
-  tl *= 100;
-  tl = Math.round(tl);
-  th = Math.round(th);
+//change text contrast
 
-  originalTH = th;
-  originalTS = ts;
-  originalTL = tl;
+//get the text-color
+var textContrast = document.getElementById("contrastText");
+var contrastText = window.getComputedStyle(textContrast).color;
 
-  // Update the current slider value (each time you drag the slider handle)
-  contrastSlider.oninput = function() {
-  newBL = this.value
-  var newBgHSL = "hsl(" + bh + ", " + bs + "%, " + newBL + "%)"
-  bgDiv.style.backgroundColor = newBgHSL;
-  var contrastDifference = originalBL - newBL;
-  var newTL = originalTL + contrastDifference;
-  var newTextHSL = "hsl(" + th + ", " + ts + "%, " + newTL + "%)";
-  textContrast.style.color = newTextHSL;
-  setContrastColor.style.color = newTextHSL;
+//extract the RBG values
+var pos1 = contrastText.indexOf("(");
+var pos2 = contrastText.indexOf(")");
+var contrastTextRGB = contrastText.slice(pos1+1, pos2);
+var arr = contrastTextRGB.split(",");
+var contrastTextRedNum = parseFloat(arr[0]);
+var contrastTextGreenNum = parseFloat(arr[1]);
+var contrastTextBlueNum = parseFloat(arr[2]);
+
+//convert RGB to HSL
+  
+  //divide RGB by 255
+  tr = contrastTextRedNum/255, tg = contrastTextGreenNum/255, tb = contrastTextBlueNum/255;
+
+  //determine which value is biggest and smallest
+  var Tmax = Math.max(tr, tg, tb), Tmin = Math.min(tr, tg, tb);
+
+  var th, ts, tl;
+  var d = Tmax - Tmin;
+
+  //calculate lightness
+  tl = (Tmax + Tmin) / 2
+
+  //calculate saturation
+  ts = (Tmax == Tmin) ? 0 : d/ 1 - Math.abs(2*tl - 1);
+  ts = Math.round(ts)
+  ts = Math.abs(ts)
+
+  //calculate hue
+  if (Tmax == Tmin) {
+    th = 0; // achromatic
+  } else {     
+    switch (Tmax) {
+      // if max = red
+      case tr: th = 60 * ((tg - tb) / d + (tg < tb ? 6 : 0)); break;
+      // if max = green
+      case tg: th = 60 * ((tb - tr) / d + 2); break;
+      // if max = blue
+      case tb: th = 60 * ((tr - tg) / d + 4); break;
+    }  
+  }
+  
+  // s & l * 100 to return as a %
+ts *= 100;
+tl *= 100;
+tl = Math.round(tl);
+th = Math.round(th);
+
+originalTH = th;
+originalTS = ts;
+originalTL = tl;
+var originalContrastTextHSL = "hsl(" + originalTH + ", " + originalTS + "%, " + originalTL + "%)";
+
+// Update the current slider value (each time you drag the slider handle)
+contrastSlider.oninput = function() {
+newBL = this.value
+var newBgHSL = "hsl(" + bh + ", " + bs + "%, " + newBL + "%)"
+bgDiv.style.backgroundColor = newBgHSL;
+var contrastDifference = originalBL - newBL;
+var newTL = originalTL + contrastDifference;
+var newTextHSL = "hsl(" + th + ", " + ts + "%, " + newTL + "%)";
+textContrast.style.color = newTextHSL;
+}
+
+//****************************************************************************highlighter text
+
+var body = document.getElementsByTagName('BODY')[0];
+var text = document.getElementById("highlightText").innerHTML;
+text.trim()
+//excludes the abbreviations Mr., Mrs., Dr., e.g., and a.s.a.p. A more complete abbreviation list is needed
+var sentenceRegExp = /(?<=(?<!Mr|Mrs|Dr|e\.g|a\.s\.a\.p|\.\.|:)\.|\!|\?)\s|<\s*br[^>]*>(?=[A-Z])/g
+var lines = text.split(sentenceRegExp)
+var a = 0;
+var scroll = document.getElementById("scroll");
+
+scroll.onclick=function(){
+
+  //remove highlight if it's there
+  var textIsHighlighted = document.getElementById("spanHighlight");
+
+  if(typeof(textIsHighlighted) != 'undefined' && textIsHighlighted != null){
+    lines[a] = lines[a].split(" ")
+    lines[a].shift();
+    lines[a].shift();
+    lines[a].pop();
+    lines[a] = lines[a].join(" ");
+    document.getElementById("highlightText").innerHTML = lines.join(" ")
+    a = 0
   }
 
-}
+  //create highlight bar to be width and height of text line
+  var highlighterText = document.getElementById("highlightText");
+  var highlighterContainer = document.getElementById('highlightContainer');
+  highlighterContainer.style.position = "relative";
+  var divWidth = highlighterText.clientWidth;
+  var lineHeight = Math.floor(fontSize * 1.4);
 
-changeContrast()
+  //style highlight bar 
+  var div = document.createElement("DIV");
+  div.style.backgroundColor = "hsl(60, 100%, 75%)";
 
-function colorChange() {
-  changeContrast()
-}
+  div.style.position = "absolute";
+  div.style.width = divWidth + "px"
+  div.style.height = lineHeight + "px"
+  highlighterText.style.zIndex = "1"
+  div.style.zIndex = "-1"
+  div.id = "highlightBar"
 
-//**********************************************************highlighter text
+  //add highligh bar above text
+  highlighterContainer.appendChild(div)
+  highlighterText.insertBefore(div, highlighterText.childNodes[0]);
+  highlighterText.style.position = "relative";
 
-//highlighter text
+  //position bar on mouseover
+  highlighterContainer.addEventListener("mousemove", tagName)
 
-var checkbox = document.getElementById("checkbox");
-var body = document.getElementsByTagName('BODY')[0];
-checkbox.onclick=function(){
-  
-  var checkboxCheck = document.getElementById("checkbox").checked
-  var text = document.getElementById("highlightText").innerHTML;
-  text.trim()
-  //excludes the abbreviations Mr., Mrs., Dr., e.g., and a.s.a.p. A more complete abbreviation list is needed
-  var sentenceRegExp = /(?<=(?<!Mr|Mrs|Dr|e\.g|a\.s\.a\.p|\.\.|:)\.|\!|\?)\s|<\s*br[^>]*>(?=[A-Z])/g
-  var lines = text.split(sentenceRegExp)
-  var i = 0;
-  
-  if (checkboxCheck == true){
-    
-    document.getElementById("highlightMethod").style.display = "block"
+  function tagName(event) { 
+    var yCo = event.offsetY;
+    var x = event.target
 
-    var scroll = document.getElementById("scroll");
-   // scroll.checked = true;
-    document.getElementById("colors").style.display = "block";
-    document.getElementById("colourRange").style.display = "block";
-    
-    scroll.onclick=function(){
-    
-    //remove highlight if it's there
-    var textIsHighlighted = document.getElementById("spanHighlight");
-    
-    if(typeof(textIsHighlighted) != 'undefined' && textIsHighlighted != null){
-      document.cookie = "color=; expires=Thu, 01 Jan 1970 00:00:00 UTC"; 
-      lines[i] = lines[i].split(" ")
-      lines[i].shift();
-      lines[i].shift();
-      lines[i].pop();
-      lines[i] = lines[i].join(" ");
-      document.getElementById("highlightText").innerHTML = lines.join(" ")
-      i = 0
+    if (x.id == 'highlightText'){
+      var highlightPos = yCo
+      div.style.top = highlightPos + "px"
     }
-      
-    //create highlight bar to be width and height of text line
-    var highlighterText = document.getElementById("highlightText");
-    var highlighterContainer = document.getElementById('highlightContainer');
-    highlighterContainer.style.position = "relative";
+  }
+
+  //make bar responsive
+  body.onresize = function() {
     var divWidth = highlighterText.clientWidth;
-    var highlightContDiv = highlighterContainer.getBoundingClientRect();
-    var highlightContHeight = highlightContDiv.height
-    var lineHeight = Math.floor(fontSize * 1.4);
-
-    //style highlight bar 
-    var div = document.createElement("DIV");
-    var yellow =  document.getElementById("yellowOption")
-    yellow.checked = true;
-    div.style.backgroundColor = "hsl(60, 100%, 75%)";
-    var colorSlider = document.getElementById("colourRange")
-    colorSlider.value = 75
-    colorSlider.oninput = function() {
-      newL = this.value
-      var newDivHSL = "hsl(" + 60 + ", " + 100 + "%, " + newL + "%)"
-      div.style.backgroundColor = newDivHSL;
-    }
-    
-    yellow.onclick=function yellow(){
-        div.style.backgroundColor = "hsl(60, 100%, 75%)";
-        colorSlider.oninput = function() {
-          newL = this.value
-          var newDivHSL = "hsl(" + 60 + ", " + 100 + "%, " + newL + "%)"
-          div.style.backgroundColor = newDivHSL;
-      }
-    }
-    
-     document.getElementById("redOption").onclick=function red(){
-          div.style.backgroundColor = "hsl(12, 100%, 75%)";
-          colorSlider.value = 75
-          colorSlider.oninput = function() {
-          newL = this.value
-          var newDivHSL = "hsl(" + 12 + ", " + 100 + "%, " + newL + "%)"
-          div.style.backgroundColor = newDivHSL;
-      }
-    }
-    
-      document.getElementById("blueOption").onclick=function blue(){
-          div.style.backgroundColor = "hsl(216, 100%, 75%)";
-          colorSlider.oninput = function() {
-          newL = this.value
-          var newDivHSL = "hsl(" + 216 + ", " + 100 + "%, " + newL + "%)"
-          div.style.backgroundColor = newDivHSL;
-          }
-    }
-    
-       document.getElementById("greenOption").onclick=function green(){
-          div.style.backgroundColor = "hsl(120, 100%, 75%)";
-          colorSlider.oninput = function() {
-          newL = this.value
-          var newDivHSL = "hsl(" + 120 + ", " + 100 + "%, " + newL + "%)"
-          div.style.backgroundColor = newDivHSL;
-          }
-    }
-    
-    div.style.position = "absolute";
+    var lineHeight = Math.floor(fontSize * 1.5);
     div.style.width = divWidth + "px"
     div.style.height = lineHeight + "px"
-    highlighterText.style.zIndex = "1"
-    div.style.zIndex = "-1"
-    div.id = "highlightBar"
+  } 
+} 
 
-    //add highligh bar above text
-    highlighterContainer.appendChild(div)
-    highlighterText.insertBefore(div, highlighterText.childNodes[0]);
-    highlighterText.style.position = "relative";
+//highlight text using the down arrow on key pad
 
-    //position bar on mouseover
-    highlighterContainer.addEventListener("mousemove", tagName)
-    function tagName(event) { 
-        var yCo = event.offsetY;
-        var textPos = highlighterText.offsetTop;
-        var x = event.target
+var pgDown = document.getElementById("pgDown") 
 
-      if (x.id == 'highlightText'){
-        var highlightPos = yCo
-        div.style.top = highlightPos + "px"
-      }
-    }
+pgDown.onclick=function(){
 
-    //make bar responsive
-    body.onresize = function() {
-      var divWidth = highlighterText.clientWidth;
-      var lineHeight = Math.floor(fontSize * 1.5);
-      div.style.width = divWidth + "px"
-      div.style.height = lineHeight + "px"
-      } 
-   } 
-     
-  //highlight text using the down arrow on key pad
-    
-  var pgDown = document.getElementById("pgDown") 
-  pgDown.onclick=function(){   
-  document.cookie = "color=; expires=Thu, 01 Jan 1970 00:00:00 UTC"; 
-  
-  //remove bar when box unchecked
+  // //remove bar when box unchecked
   var highlightBar = document.getElementById('highlightBar')
-    
-    if(typeof(highlightBar) != 'undefined' && highlightBar != null){
-        highlightBar.parentNode.removeChild(highlightBar);
-    }
-     
-   //display color choices and brightness slider
-    document.getElementById("colors").style.display = "block";
-    document.getElementById("colourRange").style.display = "block"  
-         
-    //functions for selecting next or previous array items
-    function nextItem() {
-        i += 1; // increase i by one
-      i = i % lines.length; // if we've gone too high, start from `0` again
-        return lines[i]; // give us back the item of where we are now
-    }
 
-    function prevItem() {
-        if (i === 0) { // i would become 0
-            i = lines.length; // so put it at the other end of the array
-        }
-        i = i - 1; // decrease by one
-        return lines[i]; // give us back the item of where we are now
-    }   
+  if(typeof(highlightBar) != 'undefined' && highlightBar != null){
+    highlightBar.parentNode.removeChild(highlightBar);
+  }
 
+  //functions for selecting next or previous array items
+  function nextItem() {
+    a += 1; // increase i by one
+    a = a % lines.length; // if we've gone too high, start from `0` again
+    return lines[a]; // give us back the item of where we are now
+  }
+
+  function prevItem() {
+    if (a === 0) { // i would become 0
+      a = lines.length; // so put it at the other end of the array
+    }
+    a = a - 1; // decrease by one
+    return lines[a]; // give us back the item of where we are now
+  }
+
+  if(a === 0){
     lines[0] = lines[0].split(" ")
     lines[0].unshift("<span id=\"spanHighlight\">");
     lines[0].push("</span>");
     lines[0] = lines[0].join(" ")
     var highlightLines = lines.join(" ")
     document.getElementById("highlightText").innerHTML = highlightLines
-
-   //style highlight colour
-     
-    // var highlightColour = document.getElementById("spanHighlight");
-     var yellow = document.getElementById("yellowOption");
-     yellow.checked = true;
-    var colorSlider = document.getElementById("colourRange");
-    colorSlider.value = 75;
-         
-     yellow.onclick=function yellow(){
-        document.getElementById("spanHighlight").style.backgroundColor = "hsl(60, 100%, 75%)";
-         colorSlider.value = 75
-        colorSlider.oninput = function() {
-          newL = this.value
-          var newHighlightHSL = "hsl(" + 60 + ", " + 100 + "%, " + newL + "%)"
-          document.getElementById("spanHighlight").style.backgroundColor = newHighlightHSL;
-          document.cookie = "color=" + newHighlightHSL
-      }
-       document.cookie = "color=hsl(60, 100%, 75%)"
-    }
-    
-     document.getElementById("redOption").onclick=function red(){
-          document.getElementById("spanHighlight").style.backgroundColor = "hsl(12, 100%, 75%)";
-          colorSlider.value = 75;
-          colorSlider.oninput = function() {
-          newL = this.value
-          var newHighlightHSL = "hsl(" + 12 + ", " + 100 + "%, " + newL + "%)"
-          document.getElementById("spanHighlight").style.backgroundColor = newHighlightHSL;
-          document.cookie = "color=" + newHighlightHSL
-      }
-       document.cookie = "color=hsl(12, 100%, 75%)"
-    }
-    
-      document.getElementById("blueOption").onclick=function blue(){
-          document.getElementById("spanHighlight").style.backgroundColor = "hsl(216, 100%, 75%)";
-          colorSlider.value = 75;
-          colorSlider.oninput = function() {
-          newL = this.value
-          var newHighlightHSL = "hsl(" + 216 + ", " + 100 + "%, " + newL + "%)"
-          document.getElementById("spanHighlight").style.backgroundColor = newHighlightHSL;
-          document.cookie = "color=" + newHighlightHSL;
-          }
-          document.cookie = "color=hsl(216, 100%, 75%)";
-    }
-    
-          document.getElementById("greenOption").onclick=function green(){
-          document.getElementById("spanHighlight").style.backgroundColor = "hsl(120, 100%, 75%)";
-          colorSlider.value = 75;
-          colorSlider.oninput = function() {
-          newL = this.value
-          var newHighlightHSL = "hsl(" + 120 + ", " + 100 + "%, " + newL + "%)"
-          document.getElementById("spanHighlight").style.backgroundColor = newHighlightHSL;
-          document.cookie = "color=" + newHighlightHSL;
-          }
-         document.cookie = "color=hsl(120, 100%, 75%)";
-       }
-     
-      function getCookie(name)
-  {
-    var re = new RegExp(name + "=([^;]+)");
-    var value = re.exec(document.cookie);
-    return (value != null) ? unescape(value[1]) : null;
+    document.getElementById("spanHighlight").style.backgroundColor = "hsl(60, 100%, 75%)";
   }
 
-    window.onkeydown=function highlighText(){
-      if(event.key == "d"){
+  window.onkeydown=function highlighText(){
+    if(event.key == "d"){
 
-           nextItem();
-        var setColor = getCookie("color");
+      nextItem();
 
-        if (i == 0){
-            lines[i] = lines[i].split(" ")
-            lines[i].unshift("<span id=\"spanHighlight\">");
-            lines[i].push("</span>");
-            lines[i] = lines[i].join(" ")
-            
-          var lastItem = lines.length - 1
-          lines[lastItem] = lines[lastItem].split(" ")
-          lines[lastItem].shift();
-          lines[lastItem].shift();
-          lines[lastItem].pop();
-          lines[lastItem] = lines[lastItem].join(" ");
+      if (a == 0){
+        lines[a] = lines[a].split(" ")
+        lines[a].unshift("<span id=\"spanHighlight\">");
+        lines[a].push("</span>");
+        lines[a] = lines[a].join(" ")
 
-            var highlightLines = lines.join(" ");
-            document.getElementById("highlightText").innerHTML = highlightLines;
-            document.getElementById("spanHighlight").style.backgroundColor = setColor;
+        var lastItem = lines.length - 1
+        lines[lastItem] = lines[lastItem].split(" ")
+        lines[lastItem].shift();
+        lines[lastItem].shift();
+        lines[lastItem].pop();
+        lines[lastItem] = lines[lastItem].join(" ");
 
-       } else {
-         
-          lines[i] = lines[i].trim()
-          lines[i] = lines[i].split(" ")
-          lines[i].unshift("<span id=\"spanHighlight\">");
-          lines[i].push("</span>");
-          lines[i] = lines[i].join(" ")
-         
-          lines[i-1] = lines[i-1].split(" ")
-          lines[i-1].shift();
-          lines[i-1].shift();
+        var highlightLines = lines.join(" ");
+        document.getElementById("highlightText").innerHTML = highlightLines;
 
-          lines[i-1].pop();
-          lines[i-1] = lines[i-1].join(" ");
-          
-          var highlightLines = lines.join(" ")
+      } else {
 
-          document.getElementById("highlightText").innerHTML = highlightLines
-          document.getElementById("spanHighlight").style.backgroundColor = setColor;
-          }
-                      
-      } else if (event.key == "w"){
+        lines[a] = lines[a].trim()
+        lines[a] = lines[a].split(" ")
+        lines[a].unshift("<span id=\"spanHighlight\">");
+        lines[a].push("</span>");
+        lines[a] = lines[a].join(" ")
+
+        lines[a-1] = lines[a-1].split(" ")
+        lines[a-1].shift();
+        lines[a-1].shift();
+
+        lines[a-1].pop();
+        lines[a-1] = lines[a-1].join(" ");
+
+        var highlightLines = lines.join(" ")
+
+        document.getElementById("highlightText").innerHTML = highlightLines
+      }
+    } else if (event.key == "w"){
 
       prevItem();
-          var setColor = getCookie("color");
-          var lastItem = lines.length - 1
+      var lastItem = lines.length - 1
 
-        if (i == lastItem){
-      
-          lines[i] = lines[i].split(" ")
-          lines[i].unshift("<span id=\"spanHighlight\">");
-          lines[i].push("</span>");
-          lines[i] = lines[i].join(" ")
-            
-          lines[0] = lines[0].split(" ")
-          lines[0].shift();
-          lines[0].shift();
+      if (a == lastItem){
 
-          lines[0].pop();
-          lines[0] = lines[0].join(" ");
+        lines[a] = lines[a].split(" ")
+        lines[a].unshift("<span id=\"spanHighlight\">");
+        lines[a].push("</span>");
+        lines[a] = lines[a].join(" ")
 
-          var highlightLines = lines.join(" ")
-          document.getElementById("highlightText").innerHTML = highlightLines
-          document.getElementById("spanHighlight").style.backgroundColor = setColor;
-   
-       } else {
-         
-          lines[i] = lines[i].trim()
-          lines[i] = lines[i].split(" ")
-          lines[i].unshift("<span id=\"spanHighlight\">");
-          lines[i].push("</span>");
-          lines[i] = lines[i].join(" ")
-         
-          lines[i+1] = lines[i+1].split(" ")
-          lines[i+1].shift();
-          lines[i+1].shift();
+        lines[0] = lines[0].split(" ")
+        lines[0].shift();
+        lines[0].shift();
 
-          lines[i+1].pop();
-          lines[i+1] = lines[i+1].join(" ");
-        
-          var highlightLines = lines.join(" ")
+        lines[0].pop();
+        lines[0] = lines[0].join(" ");
 
-          document.getElementById("highlightText").innerHTML = highlightLines
-          document.getElementById("spanHighlight").style.backgroundColor = setColor;
+        var highlightLines = lines.join(" ")
+        document.getElementById("highlightText").innerHTML = highlightLines
+      } else {
 
-          }
-        }
+        lines[a] = lines[a].trim()
+        lines[a] = lines[a].split(" ")
+        lines[a].unshift("<span id=\"spanHighlight\">");
+        lines[a].push("</span>");
+        lines[a] = lines[a].join(" ")
+
+        lines[a+1] = lines[a+1].split(" ")
+        lines[a+1].shift();
+        lines[a+1].shift();
+
+        lines[a+1].pop();
+        lines[a+1] = lines[a+1].join(" ");
+
+        var highlightLines = lines.join(" ")
+
+        document.getElementById("highlightText").innerHTML = highlightLines
       }
-    } 
-  } else {
-     //remove bar when box unchecked
-    var highlightBar = document.getElementById('highlightBar')
-    
-    if(typeof(highlightBar) != 'undefined' && highlightBar != null){
-        highlightBar.parentNode.removeChild(highlightBar);
     }
-    
-      //remove highlight if it's there
-    var textIsHighlighted = document.getElementById("spanHighlight");
-
-    if(typeof(textIsHighlighted) != 'undefined' && textIsHighlighted != null){
-      var outerHighlightedLine = document.getElementById("spanHighlight").outerHTML;
-      var innerHighlightedLine = document.getElementById("spanHighlight").innerHTML;
-      var text = lines.join(" ").replace(outerHighlightedLine, innerHighlightedLine)
-      document.getElementById("highlightText").innerHTML = text
-    }
-    
-    document.getElementById("colors").style.display = "none"
-    document.getElementById("colourRange").style.display = "none"
-    document.getElementById("highlightMethod").style.display = "none"
-    document.cookie = "color=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
   }
 } 
 
-//**********************************************Dyslexia friendly text
+//********************************************************************Dyslexia friendly text
 
 var dyselxiaFriendlyText = document.getElementsByClassName("dyselxia-friendly-text");
 var styling = []
@@ -536,6 +361,7 @@ var variant = []
 upperCaseNoPeriod = /(?<!\.|\.\s|<br>|<\/br>)[A-Z]{2,}/g;
 upperCasePeriod = /(?<=\.[A-Z]|\.\s[A-Z]|<br>[A-Z]|<\/br>[A-Z])[A-Z]{2,}/g;
     //make capital text lowercase
+
 
 var i
 for(i=0;i<dyselxiaFriendlyText.length;i++){
@@ -552,116 +378,128 @@ for(i=0;i<dyselxiaFriendlyText.length;i++){
   //Get text size
 
   var DFsize = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('font-size');
-  var DFfontSize = parseFloat(DFsize);
+var DFfontSize = parseFloat(DFsize);
 
-  //Get font family
-  var DFstyle = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('font-family');
+//Get font family
+var DFstyle = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('font-family');
 
-  //Get spacing
-  var DFletterSpace = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('letter-spacing');
-  var DFwordSpace = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('word-spacing');
-  var DFlineHeight = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('line-height');
+//Get spacing
+var DFletterSpace = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('letter-spacing');
+var DFwordSpace = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('word-spacing');
+var DFlineHeight = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('line-height');
 
-  var DFtextShadow = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('text-shadow');
-  var DFtextColor = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('color');
-  var DFtextAlign = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('text-align');
+var DFtextShadow = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('text-shadow');
+var DFtextColor = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('color');
+var DFtextAlign = window.getComputedStyle(dyselxiaFriendlyText[i], null).getPropertyValue('text-align');
 
-  //save original values
-  var originalDFFontSize = DFfontSize;
-  var originalDFStyle = DFstyle;
-  var originalDFLetterSpace = DFletterSpace;
-  var originalDFWordSpace = DFwordSpace;
-  var originalDFLineHeight = DFlineHeight;
-  var originalDFTextShadow = DFtextShadow;
-  var originalDFTextColor = DFtextColor;
-  var originalDFTextAlign = DFtextAlign
-  }
+//save original values
+var originalDFFontSize = DFfontSize;
+var originalDFStyle = DFstyle;
+var originalDFLetterSpace = DFletterSpace;
+var originalDFWordSpace = DFwordSpace;
+var originalDFLineHeight = DFlineHeight;
+var originalDFTextShadow = DFtextShadow;
+var originalDFTextColor = DFtextColor;
+var originalDFTextAlign = DFtextAlign
+}
 
-  //get colours
-  var dyselxiaFriendlyContainer = document.getElementById("dyselxiaFriendlyContainer");
-  var bgDFColor = window.getComputedStyle(dyselxiaFriendlyContainer, null).getPropertyValue('background-color');
+//console.log(styling)
 
-  //dyslexia friendly font choices
-  var friendlyFonts = ["Arial", "Comic Sans", "Verdana", "Tahoma", "Century Gothic", "Trebuchet", "Calibri", "Open Sans"]
+
+
+//get colours
+var dyselxiaFriendlyContainer = document.getElementById("dyselxiaFriendlyContainer");
+var bgDFColor = window.getComputedStyle(dyselxiaFriendlyContainer, null).getPropertyValue('background-color');
+
+//dyslexia friendly font choices
+var friendlyFonts = ["Arial", "Comic Sans", "Verdana", "Tahoma", "Century Gothic", "Trebuchet", "Calibri", "Open Sans"]
 
 //get heading data
 
-  var h1 = document.getElementsByTagName("H1");
-  if(typeof(h1) != 'undefined' && h1 != null){
-    for(i=0;i<h1.length;i++){
-      var h1size = window.getComputedStyle(h1[i], null).getPropertyValue('font-size');
-      var h1FontSize = parseFloat(h1size);
-      var h1color = window.getComputedStyle(h1[i], null).getPropertyValue('color');
-      var h1align = window.getComputedStyle(h1[i], null).getPropertyValue('text-align');
-    }
+var h1 = document.getElementsByTagName("H1");
+if(typeof(h1) != 'undefined' && h1 != null){
+  for(i=0;i<h1.length;i++){
+    var h1size = window.getComputedStyle(h1[i], null).getPropertyValue('font-size');
+    var h1FontSize = parseFloat(h1size);
+    var h1color = window.getComputedStyle(h1[i], null).getPropertyValue('color');
+    var h1align = window.getComputedStyle(h1[i], null).getPropertyValue('text-align');
+
   }
+}
 
-  var h2 = document.getElementsByTagName("H2");
-  if(typeof(h2) != 'undefined' && h2 != null){
-    for(i=0;i<h2.length;i++){
-      var h2size = window.getComputedStyle(h2[i], null).getPropertyValue('font-size');
-      var h2FontSize = parseFloat(h2size);
-      var h2color = window.getComputedStyle(h2[i], null).getPropertyValue('color');
-      var h2align = window.getComputedStyle(h2[i], null).getPropertyValue('text-align');
-    }
+var h2 = document.getElementsByTagName("H2");
+if(typeof(h2) != 'undefined' && h2 != null){
+  for(i=0;i<h2.length;i++){
+    var h2size = window.getComputedStyle(h2[i], null).getPropertyValue('font-size');
+    var h2FontSize = parseFloat(h2size);
+   var h2color = window.getComputedStyle(h2[i], null).getPropertyValue('color');
+    var h2align = window.getComputedStyle(h2[i], null).getPropertyValue('text-align');
+
   }
+}
 
-  var h3 = document.getElementsByTagName("H3");
-  if(typeof(h3) != 'undefined' && h3 != null){
-    for(i=0;i<h3.length;i++){
-      var h3size = window.getComputedStyle(h3[i], null).getPropertyValue('font-size');
-      var h3FontSize = parseFloat(h3size);
-      var h3color = window.getComputedStyle(h3[i], null).getPropertyValue('color');
-      var h3align = window.getComputedStyle(h3[i], null).getPropertyValue('text-align');
-    }
+var h3 = document.getElementsByTagName("H3");
+if(typeof(h3) != 'undefined' && h3 != null){
+  for(i=0;i<h3.length;i++){
+    var h3size = window.getComputedStyle(h3[i], null).getPropertyValue('font-size');
+    var h3FontSize = parseFloat(h3size);
+    var h3color = window.getComputedStyle(h3[i], null).getPropertyValue('color');
+    var h3align = window.getComputedStyle(h3[i], null).getPropertyValue('text-align');
+
   }
+}
 
-  var h4 = document.getElementsByTagName("H4");
+var h4 = document.getElementsByTagName("H4");
 
-  if(typeof(h4) != 'undefined' && h4 != null){
-  for(i=0;i<h4.length;i++){
-      var h4size = window.getComputedStyle(h4[i], null).getPropertyValue('font-size');
-      var h4FontSize = parseFloat(h4size);
-      var h4color = window.getComputedStyle(h4[i], null).getPropertyValue('color');
-      var h4align = window.getComputedStyle(h4[i], null).getPropertyValue('text-align');
-    }
+if(typeof(h4) != 'undefined' && h4 != null){
+ for(i=0;i<h4.length;i++){
+    var h4size = window.getComputedStyle(h4[i], null).getPropertyValue('font-size');
+    var h4FontSize = parseFloat(h4size);
+    var h4color = window.getComputedStyle(h4[i], null).getPropertyValue('color');
+    var h4align = window.getComputedStyle(h4[i], null).getPropertyValue('text-align');
   }
+}
 
-  var h5 = document.getElementsByTagName("H5");
-  if(typeof(h5) != 'undefined' && h5 != null){
-    for(i=0;i<h5.length;i++){
-      var h5size = window.getComputedStyle(h5[i], null).getPropertyValue('font-size');
-      var h5FontSize = parseFloat(h5size);
-      var h5color = window.getComputedStyle(h5[i], null).getPropertyValue('color');
-      var h5align = window.getComputedStyle(h5[i], null).getPropertyValue('text-align');
-    }
+var h5 = document.getElementsByTagName("H5");
+if(typeof(h5) != 'undefined' && h5 != null){
+  for(i=0;i<h5.length;i++){
+    var h5size = window.getComputedStyle(h5[i], null).getPropertyValue('font-size');
+    var h5FontSize = parseFloat(h5size);
+    var h5color = window.getComputedStyle(h5[i], null).getPropertyValue('color');
+    var h5align = window.getComputedStyle(h5[i], null).getPropertyValue('text-align');
+
   }
+}
 
-  var h6 = document.getElementsByTagName("H6");
-  if(typeof(h6) != 'undefined' && h6 != null){
-    for(i=0;i<h6.length;i++){
-      var h6size = window.getComputedStyle(h6[i], null).getPropertyValue('font-size');
-      var h6FontSize = parseFloat(h6size);
-      var h6color = window.getComputedStyle(h6[i], null).getPropertyValue('color');
-      var h6align = window.getComputedStyle(h6[i], null).getPropertyValue('text-align');
-    }
+var h6 = document.getElementsByTagName("H6");
+if(typeof(h6) != 'undefined' && h6 != null){
+  for(i=0;i<h6.length;i++){
+    var h6size = window.getComputedStyle(h6[i], null).getPropertyValue('font-size');
+    var h6FontSize = parseFloat(h6size);
+    var h6color = window.getComputedStyle(h6[i], null).getPropertyValue('color');
+    var h6align = window.getComputedStyle(h6[i], null).getPropertyValue('text-align');
+
   }
+}
 
-  var headerSizes = [h6FontSize,h5FontSize,h4FontSize,h3FontSize,h2FontSize,h1FontSize]
+var headerSizes = [h6FontSize,h5FontSize,h4FontSize,h3FontSize,h2FontSize,h1FontSize]
 
-  //Get link styling
+//console.log(headerSizes)
+//Get link styling
 
-  var link = document.getElementsByTagName("A");
-  if(typeof(link) != 'undefined' && link != null){
-    for(i=0;i<link.length;i++){
-      var linkColor = window.getComputedStyle(link[i], null).getPropertyValue('color');
-      var linkWeight = window.getComputedStyle(link[i], null).getPropertyValue('font-weight');
-      var linkDecorationLine =  window.getComputedStyle(link[i], null).getPropertyValue('text-decoration-line');
-      var linkDecorationColor =  window.getComputedStyle(link[i], null).getPropertyValue('text-decoration-color');
-      var linkDecorationStyle =  window.getComputedStyle(link[i], null).getPropertyValue('text-decoration-style');
-      var cursor =  window.getComputedStyle(link[i], null).getPropertyValue('cursor');
-    }
+var link = document.getElementsByTagName("A");
+if(typeof(link) != 'undefined' && link != null){
+  for(i=0;i<link.length;i++){
+    var linkColor = window.getComputedStyle(link[i], null).getPropertyValue('color');
+    var linkWeight = window.getComputedStyle(link[i], null).getPropertyValue('font-weight');
+    var linkDecorationLine =  window.getComputedStyle(link[i], null).getPropertyValue('text-decoration-line');
+    var linkDecorationColor =  window.getComputedStyle(link[i], null).getPropertyValue('text-decoration-color');
+    var linkDecorationStyle =  window.getComputedStyle(link[i], null).getPropertyValue('text-decoration-style');
+    var cursor =  window.getComputedStyle(link[i], null).getPropertyValue('cursor');
   }
+}
+
+//console.log(linkColor,linkWeight,linkDecorationLine,linkDecorationColor,linkDecorationStyle,cursor)
 
 var DFcheckbox = document.getElementById("dyselxiaFriendly");
 DFcheckbox.onclick=function(){
@@ -709,8 +547,8 @@ DFcheckbox.onclick=function(){
     for (x=0;x<childEl.length;x++){
         var fontStyle = window.getComputedStyle(childEl[x], null).getPropertyValue('font-style');
         var textDecoration = window.getComputedStyle(childEl[x], null).getPropertyValue('text-decoration-line')
-       var fontWeight = window.getComputedStyle(childEl[x], null).getPropertyValue('font-weight')
-      var fontVariant = window.getComputedStyle(childEl[x], null).getPropertyValue('font-variant')
+        var fontWeight = window.getComputedStyle(childEl[x], null).getPropertyValue('font-weight')
+        var fontVariant = window.getComputedStyle(childEl[x], null).getPropertyValue('font-variant')
 
         styling.push(fontStyle);
         TD.push(textDecoration);
@@ -745,7 +583,8 @@ DFcheckbox.onclick=function(){
     
  var j
  for(j=0;j<uppercase.length;j++){
-    uppercase[j].innerHTML = uppercase[j].innerHTML.toLowerCase(); 
+uppercase[j].innerHTML = uppercase[j].innerHTML.toLowerCase();
+    console.log(uppercase[j])  
   }
     
   //restyle links
