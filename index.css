@@ -16,19 +16,15 @@ section.intro, section.highlight-container {
   color: #000;
 }
 
-/* .highlight-desktop{
+.highlight-container{
   display: none;
 }
 
 @media screen and (min-width: 1024px){
-  .highlight-mobile{
-    display: none;
-  }
-
-  .highlight-desktop{
+  .highlight-container{
     display: block;
   }
-} */
+}
 
 .container{
     background-color: #EEEEEE;
